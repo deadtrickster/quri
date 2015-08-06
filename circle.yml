@@ -1,0 +1,22 @@
+machine:
+  environment:
+    PATH: $HOME/.roswell/bin:$PATH
+    ROSWELL_BRANCH: master
+    ROSWELL_INSTALL_DIR: $HOME/.roswell
+    CIRCLE_NODE_LISP_0: sbcl-bin
+    CIRCLE_NODE_LISP_1: ccl-bin
+    CIRCLE_NODE_LISP_2: abcl
+    CIRCLE_NODE_LISP_3: clisp
+
+dependencies:
+  override:
+    - curl -L https://raw.githubusercontent.com/snmsts/roswell/$ROSWELL_BRANCH/scripts/install-for-ci.sh
+        | LISP=$(eval echo \$"CIRCLE_NODE_LISP_$CIRCLE_NODE_INDEX") sh
+    - ros install prove
+    - ros config
+  cache_directories:
+    - "~/.roswell"
+
+test:
+  override:
+    - run-prove quri-test.asd: {parallel: true}
