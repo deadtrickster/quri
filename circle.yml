@@ -10,8 +10,8 @@ machine:
 
 dependencies:
   override:
-    - curl -L https://raw.githubusercontent.com/snmsts/roswell/$ROSWELL_BRANCH/scripts/install-for-ci.sh
-        | LISP=$(eval echo \$"CIRCLE_NODE_LISP_$CIRCLE_NODE_INDEX") sh
+    - curl -L https://raw.githubusercontent.com/fukamachi/roswell/debug-ci/scripts/install-for-ci.sh
+        | LISP=$(eval echo \$"CIRCLE_NODE_LISP_$CIRCLE_NODE_INDEX") bash
     - ros install prove
     - ros config
   cache_directories:
