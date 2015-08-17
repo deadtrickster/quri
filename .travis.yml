@@ -17,6 +17,11 @@ env:
     - LISP=allegro
     - LISP=cmucl
 
+addons:
+  apt:
+    packages:
+      - libc6-i386
+
 matrix:
   allow_failures:
     - env: LISP=clisp
