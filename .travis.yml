@@ -1,5 +1,5 @@
 language: common-lisp
-sudo: required
+sudo: false
 
 env:
   global:
@@ -18,6 +18,13 @@ env:
 install:
   - curl -L https://raw.githubusercontent.com/fukamachi/roswell/openjdk/scripts/install-for-ci.sh | sh
   - ros install prove
+
+addons:
+  apt:
+    packages:
+      - libc6-i386
+      - openjdk-7-jre
+      - clisp
 
 script:
   - run-prove quri-test.asd
